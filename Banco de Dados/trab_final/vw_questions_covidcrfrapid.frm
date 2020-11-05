@@ -1,0 +1,16 @@
+TYPE=VIEW
+query=select `t1`.`questionID` AS `questionID`,`t1`.`description` AS `description`,`t1`.`questionTypeID` AS `questionTypeID`,`t1`.`listTypeID` AS `listTypeID`,`t1`.`questionGroupID` AS `questionGroupID`,`t1`.`subordinateTo` AS `subordinateTo`,`t1`.`isAbout` AS `isAbout`,`ontologyURI`(\'COVIDCRFRAPID\',\'tb_questions\',`t1`.`questionID`) AS `ontologyURI` from `trab_final`.`tb_questions` `t1`
+md5=d6759e960c757bc9ed1a8213e783491d
+updatable=1
+algorithm=0
+definer_user=root
+definer_host=localhost
+suid=1
+with_check_option=0
+timestamp=2020-11-05 00:19:29
+create-version=2
+source=select `t1`.`questionID` AS `questionID`,`t1`.`description` AS `description`,`t1`.`questionTypeID` AS `questionTypeID`,`t1`.`listTypeID` AS `listTypeID`,`t1`.`questionGroupID` AS `questionGroupID`,`t1`.`subordinateTo` AS `subordinateTo`,`t1`.`isAbout` AS `isAbout`,`ontologyURI`(\'COVIDCRFRAPID\',\'tb_questions\',`t1`.`questionID`) AS `ontologyURI` from `tb_questions` `t1`
+client_cs_name=utf8mb4
+connection_cl_name=utf8mb4_unicode_ci
+view_body_utf8=select `t1`.`questionID` AS `questionID`,`t1`.`description` AS `description`,`t1`.`questionTypeID` AS `questionTypeID`,`t1`.`listTypeID` AS `listTypeID`,`t1`.`questionGroupID` AS `questionGroupID`,`t1`.`subordinateTo` AS `subordinateTo`,`t1`.`isAbout` AS `isAbout`,`ontologyURI`(\'COVIDCRFRAPID\',\'tb_questions\',`t1`.`questionID`) AS `ontologyURI` from `trab_final`.`tb_questions` `t1`
+mariadb-version=100411

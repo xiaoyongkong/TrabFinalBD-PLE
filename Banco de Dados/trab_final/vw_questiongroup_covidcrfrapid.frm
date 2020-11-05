@@ -1,0 +1,16 @@
+TYPE=VIEW
+query=select `t1`.`questionGroupID` AS `questionGroupID`,`t1`.`description` AS `description`,`t1`.`comment` AS `comment`,`ontologyURI`(\'COVIDCRFRAPID\',\'tb_questiongroup\',`t1`.`questionGroupID`) AS `ontologyURI` from `trab_final`.`tb_questiongroup` `t1`
+md5=d874b64f639096f6258fc74e21eb2961
+updatable=1
+algorithm=0
+definer_user=root
+definer_host=localhost
+suid=1
+with_check_option=0
+timestamp=2020-11-05 00:19:29
+create-version=2
+source=select `t1`.`questionGroupID` AS `questionGroupID`,`t1`.`description` AS `description`,`t1`.`comment` AS `comment`,`ontologyURI`(\'COVIDCRFRAPID\',\'tb_questiongroup\',`t1`.`questionGroupID`) AS `ontologyURI` from `tb_questiongroup` `t1`
+client_cs_name=utf8mb4
+connection_cl_name=utf8mb4_unicode_ci
+view_body_utf8=select `t1`.`questionGroupID` AS `questionGroupID`,`t1`.`description` AS `description`,`t1`.`comment` AS `comment`,`ontologyURI`(\'COVIDCRFRAPID\',\'tb_questiongroup\',`t1`.`questionGroupID`) AS `ontologyURI` from `trab_final`.`tb_questiongroup` `t1`
+mariadb-version=100411
