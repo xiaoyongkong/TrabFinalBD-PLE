@@ -20,6 +20,20 @@ $ npm run start
 # generate static project
 $ npm run generate
 ```
+### Iniciando a API
+no diretório da API, rodar os comandos:
+```shell-script
+$ npm i
+
+$ npm run start
+```
+### Iniciando o Client
+no diretório do Client, rodar os comandos:
+```shell-script
+$ npm i
+
+$ npm run dev
+```
 
 # Funções presentes no app:
 - Cadastrar um questionário
