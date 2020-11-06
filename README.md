@@ -3,8 +3,8 @@
 ### MySql
 O sistema da base de dados utiliza o MySql
 ### Node.js e npm
-Será necessário instalar a última versão do Node.js e npm(6.14) que podem se obtidos nesse [Link](https://nodejs.org/en/download/)
-para instalar as dependencias no npm
+Será necessário instalar a última versão do Node.js e npm(6.14) que podem ser obtidos nesse [Link](https://nodejs.org/en/download/).
+para instalar as dependencias no npm, devemos seguir os seguites procedimentos:
 
 ```shell-script
 # install dependencies
