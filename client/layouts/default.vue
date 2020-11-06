@@ -62,9 +62,19 @@ export default {
           to: '/'
         },
         {
+          icon: 'mdi-note-text-outline',
+          title: 'Questionários',
+          to: '/questionarios'
+        },
+        {
+          icon: 'mdi-group',
+          title: 'Grupos de Questões',
+          to: '/grupos'
+        },
+        {
           icon: 'mdi-lead-pencil',
-          title: 'Formulário',
-          to: '/form'
+          title: 'Formulários',
+          to: '/formularios'
         }
       ],
       miniVariant: false,
@@ -75,3 +85,8 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+.row_link
+  cursor: pointer
+</style>
