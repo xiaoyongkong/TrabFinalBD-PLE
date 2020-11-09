@@ -49,6 +49,19 @@ $ npm run dev
 
 *Ao obter as questões, devemos verificar o tipo da questão e se ela possui alguma resposta padronizada.
 
+# Site map e funções
+### [Link para o Site map no miro](https://miro.com/welcomeonboard/ITkjHOEOlpYASwgudhrgEeCRsuP7zkUnXnyKgHi2G4kajFRGXM9vP0TJGP7i8IBk)
+## Funções presentes no WebApp:
+### Página inicial:
+Aqui podemos navegar para as páginas de consulta de questionários, módulos e grupos de questões.
+![Página inicial](Imagens/Pagina_inicial.png?raw=true)
+### Questionários:
+Na página de questionários é possível consultar todos os questionários existentes no banco, além de podermos executar as ações de editar a descrição de um questionário e excluí-lo(ações representadas pelos ícones na coluna "Ações" da tabela, respectivamente). Além disso, podemos criar um novo questionário do zero.
+![Questionários](Imagens/Questionarios.png?raw=true)
+### Grupos de questões:
+Ao acessar os grupos de questões, será apresentada uma tabela com a descrição e o identificador do grupo de quesões, assim como possíveis comentários sobre o mesmo.
+![Grupos de questões](Imagens/Grupos_de_questoes.png?raw=true)
+
 # Querrys
 
 ## Listar todos os questionários salvos no BD:
