@@ -15,7 +15,7 @@ router.get('/:id', async function(req, res, next) {
   if (!!req.query.page) page = req.query.page;
   let form = 'Módulo indefinido'
   let questionnaire = 'Formulário indefinido'
-  sql.query('SELECT f.description as form, q.description as questionnaire FROM tb_crfforms f join tb_questionnaire q on f.questionnaireId=q.questionnaireId WHERE f.crfFormsId=1', [req.params.id], (err, rows, fields) => {
+  sql.query('SELECT f.description as form, q.description as questionnaire FROM tb_crfforms f join tb_questionnaire q on f.questionnaireId=q.questionnaireId WHERE f.crfFormsId=?', [req.params.id], (err, rows, fields) => {
     if (err) throw err;
     form = rows[0].form
     questionnaire = rows[0].questionnaire
