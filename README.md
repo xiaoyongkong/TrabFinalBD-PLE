@@ -69,6 +69,21 @@ Ao acessar os grupos de questões, será apresentada uma tabela com a descriçã
 SELECT * FROM tb_questionnaire
 ```
 
+## Inserir Um novo questionário no BD
+```SQL
+INSERT INTO `tb_questionnaire` (description) VALUES (?)
+```
+
+## Remover um questionário do BD
+```SQL
+DELETE FROM `tb_questionnaire` WHERE questionnaireID = ?
+```
+
+## Atualizar a descrição de um questionário no BD
+```SQL
+UPDATE `tb_questionnaire` SET description = ? WHERE questionnaireID = ?
+```
+
 ## Listar os módulos(Forms) que estão presentes em um determinado questionário:
 ```SQL
 SELECT * FROM tb_questionnaire WHERE questionnaireID = ?
@@ -76,9 +91,16 @@ SELECT * FROM tb_questionnaire WHERE questionnaireID = ?
 
 ## Resgatar as questões que estão dentro de um módulo CRF específico de forma ordenada:
 ```SQL
-SELECT tb_questions.description 
-FROM tb_questions,tb_questiongroupform 
-WHERE tb_questiongroupform.crfFormsID = ? 
-AND tb_questiongroupform.questionID = tb_questions.questionID 
-ORDER BY tb_questiongroupform.questionOrder ASC
+SELECT *, f.description as form, q.description as question, qt.description questionType, qg.description questionGroup 
+FROM `tb_questiongroupform` qgf JOIN `tb_questions` q 
+on qgf.questionId=q.questionId 
+LEFT OUTER JOIN `tb_questionGroup` qg 
+on q.questionGroupID=qg.questionGroupId 
+JOIN `tb_crfforms` f 
+on qgf.crfFormsId=f.crfFormsId 
+JOIN tb_questiontype qt 
+on q.questionTypeId=qt.questionTypeId 
+where f.crfFormsId = ? 
+ORDER BY qgf.questionOrder ASC 
+LIMIT 10 OFFSET ?
 ```
