@@ -46,6 +46,7 @@ $ npm run dev
 - Módulos(Etapas de um questionário)
 - Agrupamentos(questões que tratam de um mesmo tema/ área de conhecimento)
 - Questões*
+
 *Ao obter as questões, devemos verificar o tipo da questão e se ela possui alguma resposta padronizada.
 
 # Querrys
