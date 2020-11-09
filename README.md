@@ -1,4 +1,11 @@
 # TrabFinalBD-PLE
+
+Proposta - Registro de um questionário na base de dados de Apoio para Pesquisas Clínicas.
+
+Renan Mendanha - 
+Vínicius Flores -  
+Xiao Yong Kong - 114176987
+
 # Dependências e versões sendo utilizadas
 ### MySql
 O sistema da base de dados utiliza o MySql
