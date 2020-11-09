@@ -24,6 +24,9 @@
                 Módulo
               </th>
               <th class="text-left">
+                Grupo
+              </th>
+              <th class="text-left">
                 Questão
               </th>
               <th class="text-left">
@@ -38,10 +41,10 @@
             <tr
               v-for="(item, j) in questions"
               :key="'question_' + j"
-              class="row_link"
             >
               <td>{{ item.questionID }}</td>
               <td>{{ item.form }}</td>
+              <td>{{ item.questionGroup ? item.questionGroup : 'Sem Grupo' }}</td>
               <td>{{ item.question }}</td>
               <td>{{ item.questionType }}</td>
               <td><v-btn class="secondary">Editar</v-btn></td>

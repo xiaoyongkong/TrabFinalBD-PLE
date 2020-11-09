@@ -71,11 +71,6 @@ export default {
           title: 'Grupos de Questões',
           to: '/grupos'
         },
-        {
-          icon: 'mdi-lead-pencil',
-          title: 'Formulários',
-          to: '/formularios'
-        }
       ],
       miniVariant: false,
       right: true,

@@ -1,6 +1,8 @@
 <template>
-  <div>
-    Página inicial
+  <div class="d-flex flex-column justify-center pt-5">
+    <v-btn class="mb-2">Questionários</v-btn>
+    <v-btn class="mb-2">Módulos</v-btn>
+    <v-btn>Questões</v-btn>
   </div>
 </template>
 
