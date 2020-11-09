@@ -3,7 +3,7 @@
 Proposta - Registro de um questionário na base de dados de Apoio para Pesquisas Clínicas.
 
 Renan Mendanha - 118055604  
-Vínicius Flores -  
+Vínicius Flores -  115048056  
 Xiao Yong Kong - 114176987
 
 # Dependências e versões sendo utilizadas
