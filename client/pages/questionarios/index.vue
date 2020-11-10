@@ -33,54 +33,13 @@
                 {{ item.description }}
               </td>
               <td style="white-space: nowrap; width:0.1%;">
-                <v-dialog
-                  v-model="editDialog"
-                  persistent
-                  max-width="600"
+                <v-btn
+                  color="secondary"
+                  dark
+                  @click="{editQuestionnaireId=item.questionnaireID; editDialog = true}"
                 >
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-btn
-                      color="secondary"
-                      dark
-                      v-bind="attrs"
-                      v-on="on"
-                    >
-                      <v-icon>mdi-file-edit</v-icon>
-                    </v-btn>
-                  </template>
-                  <v-card>
-                    <v-card-title class="headline">
-                      Editar questionário
-                    </v-card-title>
-                    <v-card-text>
-                      <v-text-field
-                        :loading="editDialogLoading"
-                        label="Nova Descrição"
-                        v-model="editQuestionnaireDescription"
-                        outlined
-                      />
-                    </v-card-text>
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn
-                        color="green darken-1"
-                        text
-                        :disabled="editDialogLoading"
-                        @click="editQuestionnaire(item.questionnaireID)"
-                      >
-                        Confirmar
-                      </v-btn>
-                      <v-btn
-                        color="red darken-1"
-                        text
-                        :disabled="editDialogLoading"
-                        @click="editDialog = false"
-                      >
-                        Cancelar
-                      </v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
+                  <v-icon>mdi-file-edit</v-icon>
+                </v-btn>
                 <v-btn class="error" @click="deleteQuestionnaire(item.questionnaireID)"><v-icon>mdi-delete</v-icon></v-btn>
               </td>
             </tr>
@@ -93,7 +52,46 @@
       <v-progress-circular indeterminate />
     </div>
 
-    <div class="d-flex mt-5">
+    <v-dialog
+      v-model="editDialog"
+      persistent
+      max-width="600"
+    >
+      <v-card>
+        <v-card-title class="headline">
+          Editar questionário
+        </v-card-title>
+        <v-card-text>
+          <v-text-field
+            :loading="editDialogLoading"
+            label="Nova Descrição"
+            v-model="editQuestionnaireDescription"
+            outlined
+          />
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="green darken-1"
+            text
+            :disabled="editDialogLoading"
+            @click="editQuestionnaire(editQuestionnaireId)"
+          >
+            Confirmar
+          </v-btn>
+          <v-btn
+            color="red darken-1"
+            text
+            :disabled="editDialogLoading"
+            @click="editDialog = false"
+          >
+            Cancelar
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <div class="d-flex mt-5"> 
       <v-dialog
         v-model="dialog"
         persistent
@@ -159,6 +157,7 @@ export default {
       dialog: false,
       dialogLoading: false,
       editDialog: false,
+      editQuestionnaireId: null,
       editDialogLoading: false,
       editQuestionnaireDescription: '',
       newQuestionnaireDescription: '',
