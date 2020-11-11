@@ -96,6 +96,21 @@ UPDATE `tb_questionnaire` SET description = ? WHERE questionnaireID = ?
 SELECT * FROM tb_questionnaire WHERE questionnaireID = ?
 ```
 
+## Inserir um novo Form de um questionário específico no BD 
+```SQL
+INSERT INTO `tb_crfforms` (description, questionnaireID) VALUES (?, ?)
+```
+
+## Remover um Form de um questionário específico no BD 
+```SQL
+DELETE FROM `tb_crfforms` WHERE crfFormsID = ?
+```
+
+## Atualizar a descrição do Form de um questionário específico no BD 
+```SQL
+UPDATE `tb_crfforms` SET description = ? WHERE crfFormsID = ?
+```
+
 ## Resgatar as questões que estão dentro de um módulo CRF específico de forma ordenada:
 ```SQL
 SELECT *, f.description as form, q.description as question, qt.description questionType, qg.description questionGroup 
