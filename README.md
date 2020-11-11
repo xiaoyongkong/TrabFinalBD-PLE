@@ -69,7 +69,7 @@ Na página de questionários é possível consultar todos os questionários exis
 Ao acessar os grupos de questões, será apresentada uma tabela com a descrição e o identificador do grupo de quesões, assim como possíveis comentários sobre o mesmo.
 ![Grupos de questões](Imagens/Grupos_de_questoes.png?raw=true)
 
-# Querrys
+# Queries
 
 ## Listar todos os questionários salvos no BD:
 ```SQL
@@ -110,4 +110,23 @@ on q.questionTypeId=qt.questionTypeId
 where f.crfFormsId = ? 
 ORDER BY qgf.questionOrder ASC 
 LIMIT 10 OFFSET ?
+```
+
+## Alterações realizadas no BD
+### Adicionada a chave primária 'questionaireID' na relalção 'tb_questionaire'
+```SQL
+ALTER TABLE `tb_questionnaire`
+  ADD PRIMARY KEY (`questionnaireID`);
+```
+### Mudado o campo 'questionaireID' da tabela 'tb_questionaire' para Auto_Increment
+Essa mudança permite designar um id automáticamente aos novos questionários adicionados à relação.
+```SQL
+ALTER TABLE `tb_questionnaire`
+  MODIFY `questionnaireID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+```
+### Mudado o campo 'crfFormsID' da tabela 'tb_crfforms' para Auto_Increment
+Essa mudança permite designar um id automáticamente aos novos Formulários(módulos) adicionados à relação.
+```SQL
+ALTER TABLE `tb_crfforms`
+  MODIFY `crfFormsID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 ```
