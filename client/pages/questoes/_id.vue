@@ -235,7 +235,7 @@ export default {
     this.$axios.$get('/api/questions/types').then(r => {
       this.selectableQuestionTypes = this.selectableQuestionTypes.concat(r)
     })
-    this.$axios.$get('/api/questions/types').then(r => {
+    this.$axios.$get('/api/questions/groups').then(r => {
       this.selectableGroups = this.selectableGroups.concat(r)
     })
   },
