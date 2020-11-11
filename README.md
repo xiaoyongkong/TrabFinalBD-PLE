@@ -93,7 +93,7 @@ UPDATE `tb_questionnaire` SET description = ? WHERE questionnaireID = ?
 
 ## Listar os módulos(Forms) que estão presentes em um determinado questionário:
 ```SQL
-SELECT * FROM tb_questionnaire WHERE questionnaireID = ?
+SELECT * FROM tb_crfforms WHERE questionnaireID = ?
 ```
 
 ## Inserir um novo Form de um questionário específico no BD 
