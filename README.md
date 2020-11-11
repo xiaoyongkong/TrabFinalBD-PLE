@@ -98,7 +98,7 @@ UPDATE `tb_questionnaire` SET description = ? WHERE questionnaireID = ?
 SELECT * FROM `tb_crfforms` WHERE questionnaireID = ?
 ```
 
-## Inserir um novo Form de um questionário específico no BD 
+## Inserir um novo Form em um questionário específico no BD 
 ```SQL
 INSERT INTO `tb_crfforms` (description, questionnaireID) VALUES (?, ?)
 ```
