@@ -80,7 +80,10 @@
               <v-select
                 :loading="editDialogLoading"
                 label="Grupo"
-                v-model="editQuestion.description"
+                :items="selectableGroups"
+                item-text="description"
+                item-value="questionGroupID"
+                v-model="editQuestion.questionGroupID"
                 outlined
               />
               <v-text-field
@@ -92,7 +95,10 @@
               <v-select
                 :loading="editDialogLoading"
                 label="Tipo de Questão"
-                v-model="editQuestion.description"
+                :items="selectableQuestionTypes"
+                item-text="description"
+                item-value="questionTypeID"
+                v-model="editQuestion.questionTypeID"
                 outlined
               />
             </v-card-text>
@@ -140,7 +146,10 @@
               <v-select
                 :loading="editDialogLoading"
                 label="Grupo"
-                v-model="editQuestion.description"
+                :items="selectableGroups"
+                item-text="description"
+                item-value="questionGroupID"
+                v-model="editQuestion.questionGroupID"
                 outlined
               />
               <v-text-field
@@ -152,7 +161,10 @@
               <v-select
                 :loading="editDialogLoading"
                 label="Tipo de Questão"
-                v-model="editQuestion.description"
+                :items="selectableQuestionTypes"
+                item-text="description"
+                item-value="questionTypeID"
+                v-model="editQuestion.questionTypeID"
                 outlined
               />
             </v-card-text>
@@ -180,7 +192,6 @@
       </div>
 
       </div>
-
     </div>
 
     <div v-else>
@@ -208,17 +219,25 @@ export default {
       editDialogLoading: false,
       editQuestion: {
         description: null,
+        questionTypeID: null,
+        questionGroupID: null
       },
       editQuestionLoading: false,
       page: 1,
-      selectableQuestionTypes: [],
-      selectableForms: [],
+      selectableQuestionTypes: [{questionTypeID: null, description: 'Sem Tipo'}],
+      selectableGroups: [{questionGroupID: null, description: 'Sem Grupo'}],
       loading: true
     }
   },
 
   created() {
     this.fetchQuestions()
+    this.$axios.$get('/api/questions/types').then(r => {
+      this.selectableQuestionTypes = this.selectableQuestionTypes.concat(r)
+    })
+    this.$axios.$get('/api/questions/types').then(r => {
+      this.selectableGroups = this.selectableGroups.concat(r)
+    })
   },
 
   methods: {

@@ -10,6 +10,20 @@ router.get('/', async function(req, res, next) {
   })
 });
 
+router.get('/types', async function(req, res, next) {
+  sql.query('SELECT * FROM `tb_questiontype`', (err, rows, fields) => {
+    if (err) throw err;
+    res.send(rows)
+  })
+})
+
+router.get('/groups', async function(req, res, next) {
+  sql.query('SELECT * FROM `tb_questiongroup`', (err, rows, fields) => {
+    if (err) throw err;
+    res.send(rows)
+  })
+})
+
 router.get('/:id', async function(req, res, next) {
   let page = 1;
   if (!!req.query.page) page = req.query.page;
@@ -26,11 +40,5 @@ router.get('/:id', async function(req, res, next) {
   })
 
 });
-
-router.get('/types', async function(req, res, next) {
-  sql.query('SELECT * from `tb_questionTypes`', (err, rows, fields) => {
-
-  })
-})
 
 module.exports = router;
