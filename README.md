@@ -68,7 +68,9 @@ Na página de questionários é possível consultar todos os questionários exis
 ### Grupos de questões:
 Ao acessar os grupos de questões, será apresentada uma tabela com a descrição e o identificador do grupo de quesões, assim como possíveis comentários sobre o mesmo.
 ![Grupos de questões](Imagens/Grupos_de_questoes.png?raw=true)
-
+### Forms:
+Após selecionar um questionário, será exibida a tela de forms, nela podemos adicionar um novo form e remover ou editar um já existente.
+![Forms](Imagens/Forms.png?raw=true)
 # Queries
 
 ## Listar todos os questionários salvos no BD:
@@ -93,10 +95,10 @@ UPDATE `tb_questionnaire` SET description = ? WHERE questionnaireID = ?
 
 ## Listar os módulos(Forms) que estão presentes em um determinado questionário:
 ```SQL
-SELECT * FROM tb_crfforms WHERE questionnaireID = ?
+SELECT * FROM `tb_crfforms` WHERE questionnaireID = ?
 ```
 
-## Inserir um novo Form de um questionário específico no BD 
+## Inserir um novo Form em um questionário específico no BD 
 ```SQL
 INSERT INTO `tb_crfforms` (description, questionnaireID) VALUES (?, ?)
 ```
