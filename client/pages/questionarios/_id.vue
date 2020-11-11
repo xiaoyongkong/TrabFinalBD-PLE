@@ -87,55 +87,55 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
-      <v-dialog
-        v-model="dialog"
-        persistent
-        max-width="600"
-      >
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            color="primary"
-            dark
-            v-bind="attrs"
-            v-on="on"
-          >
-            Adicionar novo módulo
-          </v-btn>
-        </template>
-        <v-card>
-          <v-card-title class="headline">
-            Adicionar novo módulo
-          </v-card-title>
-          <v-card-text>
-            <v-text-field
-              :loading="dialogLoading"
-              label="Descrição"
-              v-model="newFormDescription"
-              outlined
-            />
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
+        <v-dialog
+          v-model="dialog"
+          persistent
+          max-width="600"
+        >
+          <template v-slot:activator="{ on, attrs }">
             <v-btn
-              color="green darken-1"
-              text
-              :disabled="dialogLoading"
-              @click="createForm()"
+              color="primary"
+              dark
+              v-bind="attrs"
+              v-on="on"
             >
-              Criar novo módulo
+              Adicionar novo módulo
             </v-btn>
-            <v-btn
-              color="red darken-1"
-              text
-              :disabled="dialogLoading"
-              @click="dialog = false"
-            >
-              Cancelar
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </div>
+          </template>
+          <v-card>
+            <v-card-title class="headline">
+              Adicionar novo módulo
+            </v-card-title>
+            <v-card-text>
+              <v-text-field
+                :loading="dialogLoading"
+                label="Descrição"
+                v-model="newFormDescription"
+                outlined
+              />
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                color="green darken-1"
+                text
+                :disabled="dialogLoading"
+                @click="createForm()"
+              >
+                Criar novo módulo
+              </v-btn>
+              <v-btn
+                color="red darken-1"
+                text
+                :disabled="dialogLoading"
+                @click="dialog = false"
+              >
+                Cancelar
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </div>
     </div>
 
     <div v-else>

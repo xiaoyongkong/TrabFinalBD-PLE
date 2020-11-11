@@ -27,4 +27,10 @@ router.get('/:id', async function(req, res, next) {
 
 });
 
+router.get('/types', async function(req, res, next) {
+  sql.query('SELECT * from `tb_questionTypes`', (err, rows, fields) => {
+
+  })
+})
+
 module.exports = router;
