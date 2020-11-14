@@ -48,7 +48,7 @@
               <td>{{ item.question }}</td>
               <td>{{ item.questionType }}</td>
               <td style="white-space: nowrap; width:0.1%;">
-                <v-btn class="secondary" @click="{editFormId=item.crfFormsID; editDialog = true}"><v-icon>mdi-file-edit</v-icon></v-btn>
+                <v-btn class="secondary" @click="{editQuestionId=item.questionID; editDialog = true}"><v-icon>mdi-file-edit</v-icon></v-btn>
                 <v-btn class="error" @click="deleteForm(item.crfFormsID)"><v-icon>mdi-delete</v-icon></v-btn>
               </td>
             </tr>
@@ -215,6 +215,7 @@ export default {
       questionnaire: 'Formulário indefinido',
       dialog: false,
       dialogLoading: false,
+      editQuestionId: null,
       editDialog: false,
       editDialogLoading: false,
       editQuestion: {
@@ -259,12 +260,24 @@ export default {
       }
     },
 
-    updateQuestion() {
+    updateQuestion(id) {
+      this.$axios.$post('/api/questions/edit/' + this.editQuestionId, this.editQuestion).then(r => {
+        console.log(r)
+      })
+      this.cleanFields()
       this.editDialog = false
     },
 
     createQuestion() {
       this.dialog = false
+    },
+
+    cleanFields() {
+      this.editDialog = {
+        description: null,
+        questionTypeID: null,
+        questionGroupID: null
+      }
     }
   }
 }
