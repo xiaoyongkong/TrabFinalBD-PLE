@@ -129,6 +129,33 @@ ORDER BY qgf.questionOrder ASC
 LIMIT 10 OFFSET ?
 ```
 
+## Seleção de uma questão específica em um Form
+```SQL
+SELECT * FROM `tb_questions` q 
+JOIN `tb_questiongroupform` qgf on qgf.questionID=q.questionID 
+JOIN `tb_crfforms` crf on crf.crfFormsID=qgf.crfFormsID 
+where q.questionID=?
+```
+## Seleção da ordem das questões em um grupamento de questões específico em um Form
+```SQL
+SELECT qgf.questionOrder, q.questionGroupID 
+FROM `tb_questions` q 
+JOIN `tb_questiongroupform` qgf on qgf.questionID=q.questionID 
+where q.questionGroupID=? 
+and qgf.crfFormsID=? 
+LIMIT 1
+```
+
+## Atualizar a descrição de uma questão em um form
+Para verificar se a ação está somente mudando a descrição de uma questão, o grupo da questão e o ID não deve ser alterado, por isso há a verificação do novo grupo da questão, se ele for igual, a querry muda somente a descrição. 
+```JavaScript
+if (questionGroupID_before == req.body.questionGroupID)
+```
+Se este for o caso, executamos a seguinte querry:
+```SQL
+UPDATE `tb_questions` SET description=?, questionTypeID=? where questionID=?
+```
+
 ## Alterações realizadas no BD
 ### Adicionada a chave primária 'questionaireID' na relalção 'tb_questionaire'
 ```SQL
