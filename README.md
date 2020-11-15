@@ -156,6 +156,21 @@ Se este for o caso, executamos a seguinte querry:
 UPDATE `tb_questions` SET description=?, questionTypeID=? where questionID=?
 ```
 
+## Selecionar o valor da ordem da última questão de um grupamento em um form
+Se há mudança no grupamento da questão executaremos a querry que será apresentada a seguir para adicionar corretamente uma ordem à nova questão, mas antes, devemos verificar se estamos tratando de uma questão genérica, caso seja uma questão genérica não possuirá grupo e, por conseguência, terá o 'questionGroupID' nulo. Se tivermos uma verificação de nulo, devemos utilizar a declaração lógica 'is'ao invéz de '='. 
+```JavaScript
+let dynamic_statement = '='
+if (req.body.questionGroupID == null)
+  dynamic_statement = 'is'
+```
+Executamos a seguinte querry, inserindo a variável que define o tipo de comparação:
+```SQL
+SELECT MAX(qgf.questionOrder) as questionOrder 
+from `tb_questions` q 
+JOIN `tb_questiongroupform` qgf on q.questionID=qgf.questionID 
+where q.questionGroupID ' + dynamic_statement + ' ? and qgf.crfFormsID = ?
+```
+
 ## Alterações realizadas no BD
 ### Adicionada a chave primária 'questionaireID' na relalção 'tb_questionaire'
 ```SQL
