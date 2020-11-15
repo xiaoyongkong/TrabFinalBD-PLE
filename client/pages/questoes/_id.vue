@@ -149,13 +149,13 @@
                 :items="selectableGroups"
                 item-text="description"
                 item-value="questionGroupID"
-                v-model="editQuestion.questionGroupID"
+                v-model="createQuestion.questionGroupID"
                 outlined
               />
               <v-text-field
                 :loading="editDialogLoading"
                 label="Nova Descrição"
-                v-model="editQuestion.description"
+                v-model="createQuestion.description"
                 outlined
               />
               <v-select
@@ -164,7 +164,7 @@
                 :items="selectableQuestionTypes"
                 item-text="description"
                 item-value="questionTypeID"
-                v-model="editQuestion.questionTypeID"
+                v-model="createQuestion.questionTypeID"
                 outlined
               />
             </v-card-text>
@@ -174,7 +174,7 @@
                 color="green darken-1"
                 text
                 :disabled="dialogLoading"
-                @click="createQuestion()"
+                @click="createNewQuestion()"
               >
                 Criar nova questão
               </v-btn>
@@ -223,6 +223,11 @@ export default {
         questionTypeID: null,
         questionGroupID: null
       },
+      createQuestion: {
+        description: null,
+        questionTypeID: null,
+        questionGroupID: null,
+      },
       editQuestionLoading: false,
       page: 1,
       selectableQuestionTypes: [{questionTypeID: null, description: 'Sem Tipo'}],
@@ -265,15 +270,26 @@ export default {
         console.log(r)
       })
       this.cleanFields()
+      this.fetchQuestions()
       this.editDialog = false
     },
 
-    createQuestion() {
+    createNewQuestion() {
+      this.$axios.$post('/api/questions/create', {crfFormsID: this.$route.params.id, ...this.createQuestion}).then(r => {
+        console.log(r)
+      })
+      this.cleanFields()
+      this.fetchQuestions()
       this.dialog = false
     },
 
     cleanFields() {
-      this.editDialog = {
+      this.editQuestion = {
+        description: null,
+        questionTypeID: null,
+        questionGroupID: null
+      }
+      this.createQuestion = {
         description: null,
         questionTypeID: null,
         questionGroupID: null

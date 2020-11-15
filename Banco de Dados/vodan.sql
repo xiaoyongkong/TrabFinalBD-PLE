@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2020 at 08:34 AM
+-- Generation Time: Nov 15, 2020 at 03:39 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -4124,6 +4124,12 @@ ALTER TABLE `tb_questionnaire`
   ADD PRIMARY KEY (`questionnaireID`);
 
 --
+-- Indexes for table `tb_questions`
+--
+ALTER TABLE `tb_questions`
+  ADD PRIMARY KEY (`questionID`);
+
+--
 -- Indexes for table `tb_user`
 --
 ALTER TABLE `tb_user`
@@ -4172,6 +4178,12 @@ ALTER TABLE `tb_permission`
 --
 ALTER TABLE `tb_questionnaire`
   MODIFY `questionnaireID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tb_questions`
+--
+ALTER TABLE `tb_questions`
+  MODIFY `questionID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=256;
 
 --
 -- AUTO_INCREMENT for table `tb_user`

@@ -29,7 +29,6 @@ router.post('/edit/:id', async function(req, res, next) {
   else {
     sql.query('SELECT * FROM `tb_questions` q JOIN `tb_questiongroupform` qgf on qgf.questionID=q.questionID JOIN `tb_crfforms` crf on crf.crfFormsID=qgf.crfFormsID where q.questionID=?', [req.params.id], (err, rows, fields) => {
       if (err) throw err;
-      let questionnaireId = rows[0].questionnaireId
       let crfFormsId = rows[0].crfFormsID
       let questionGroupID_before = rows[0].questionGroupID
 
@@ -38,8 +37,6 @@ router.post('/edit/:id', async function(req, res, next) {
         let questionOrder_before_groupIndex = null
         if (!!rows2 && rows2.length)
           questionOrder_before_groupIndex = parseInt(rows2[0].questionOrder.toString().charAt(2))
-
-        console.log(questionGroupID_before, req.body.questionGroupID)
 
         if (questionGroupID_before == req.body.questionGroupID)
           sql.query('UPDATE `tb_questions` SET description=?, questionTypeID=? where questionID=?', [req.body.description, req.body.questionTypeID, req.params.id], (err, rows3, fields) => {
@@ -52,10 +49,9 @@ router.post('/edit/:id', async function(req, res, next) {
           sql.query('SELECT MAX(qgf.questionOrder) as questionOrder from `tb_questions` q JOIN `tb_questiongroupform` qgf on q.questionID=qgf.questionID where q.questionGroupID ' + dynamic_statement + ' ? and qgf.crfFormsID = ? ', [req.body.questionGroupID, crfFormsId], async(err, rows3, fields) => {
             if (err) throw err;
             let questionOrder = null
+
             if (rows3[0].questionOrder) {
               questionOrder = rows3[0].questionOrder + 1
-
-              console.log(questionOrder)
 
               sql.beginTransaction(err => {
                 if (err) throw err;
@@ -116,15 +112,71 @@ router.post('/edit/:id', async function(req, res, next) {
                 })
               })
             }
-
-
           })
         }
-
       })
     })
   }
+})
 
+router.post('/create', async function(req, res, next) {
+  let dynamic_statement = '='
+  if (!req.body.questionGroupID)
+    dynamic_statement = 'is'
+  sql.query('SELECT MAX(qgf.questionOrder) questionOrder from `tb_questions` q join `tb_questiongroupform` qgf on q.questionID=qgf.questionID where qgf.crfFormsID=? and q.questionGroupID ' + dynamic_statement + ' ?', [req.body.crfFormsID, req.body.questionGroupID], (err, rows, fields) => {
+    if (err) throw err;
+    let groupQuestionOrder = null
+    if (!!rows && rows.length)
+      groupQuestionOrder = rows[0].questionOrder
+
+    if (groupQuestionOrder)
+      sql.beginTransaction(err => {
+        if (err) throw err;
+        sql.query('INSERT INTO `tb_questions` (description, questionTypeID, questionGroupID) values (?,?,?)', [req.body.description, req.body.questionTypeID, req.body.questionGroupID], (err, rows2) => {
+          if (err)
+            sql.rollback(() => {
+              throw err
+            })
+          sql.query('INSERT INTO `tb_questiongroupform` (questionID, crfFormsID, questionOrder) values (?, ?, ?)', [rows2.insertId, req.body.crfFormsID, groupQuestionOrder + 1], err => {
+            if (err)
+              sql.rollback(() => {
+                throw err
+              })
+            else sql.commit()
+          })
+        })
+      })
+
+    else {
+      sql.query('SELECT MAX(qgf.questionOrder) questionOrder from `tb_questions` q join `tb_questiongroupform` qgf on q.questionID=qgf.questionID where qgf.crfFormsID=?', [req.body.crfFormsID], (err, rows2) => {
+        if (err) throw err;
+        let questionOrder = null
+        if (!!rows2 && rows2.length && rows2[0].questionOrder) {
+          console.log('eita')
+          questionOrder = parseInt(rows2[0].questionOrder.toString().slice(0, -2) + '00') + 100
+        } else questionOrder = req.body.crfFormsID * 10000
+
+        sql.beginTransaction(err => {
+          if (err) throw err;
+          sql.query('INSERT INTO `tb_questions` (description, questionTypeID, questionGroupID) values (?,?,?)', [req.body.description, req.body.questionTypeID, req.body.questionGroupID], (err, rows3) => {
+            if (err)
+              sql.rollback(() => {
+                throw err
+              })
+            sql.query('INSERT INTO `tb_questiongroupform` (questionID, crfFormsID, questionOrder) VALUES (?,?,?)', [rows3.insertId, req.body.crfFormsID, questionOrder], err => {
+              if (err)
+                sql.rollback(() => {
+                  throw err
+                })
+              else sql.commit()
+            })
+          })
+        })
+
+      })
+
+    }
+  })
 })
 
 router.get('/:id', async function(req, res, next) {
