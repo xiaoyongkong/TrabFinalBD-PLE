@@ -49,7 +49,7 @@
               <td>{{ item.questionType }}</td>
               <td style="white-space: nowrap; width:0.1%;">
                 <v-btn class="secondary" @click="{editQuestionId=item.questionID; editDialog = true}"><v-icon>mdi-file-edit</v-icon></v-btn>
-                <v-btn class="error" @click="deleteForm(item.crfFormsID)"><v-icon>mdi-delete</v-icon></v-btn>
+                <v-btn class="error" @click="deleteQuestion(item.questionID)"><v-icon>mdi-delete</v-icon></v-btn>
               </td>
             </tr>
           </tbody>
@@ -272,6 +272,12 @@ export default {
       })
       this.cleanFields()
       this.editDialog = false
+    },
+
+    deleteQuestion(id) {
+      this.$axios.$post('/api/questions/delete', {id: id}).then(r => {
+        this.fetchQuestions()
+      })
     },
 
     createNewQuestion() {

@@ -59,7 +59,7 @@
     >
       <v-card>
         <v-card-title class="headline">
-          Editar questionário
+          Editar grupo de questões
         </v-card-title>
         <v-card-text>
           <v-text-field

@@ -31,6 +31,13 @@ router.post('/groups', async function(req, res, next) {
   })
 })
 
+router.post('/delete', async function(req, res, next) {
+  sql.query('DELETE FROM `tb_questions` where questionID = ?', [req.body.id], (err, rows, fields) => {
+    if (err) throw err;
+    res.send(rows);
+  })
+})
+
 router.post('/groups/delete', async function(req, res, next) {
   sql.query('DELETE FROM `tb_questiongroup` WHERE questionGroupID = ?', [req.body.id], (err, rows, fields) => {
     if (err) throw err;
