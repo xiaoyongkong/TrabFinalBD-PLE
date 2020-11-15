@@ -1,4 +1,4 @@
-# TrabFinalBD-PLE
+# Projeto Vodan - PLE
 
 Proposta - Registro de um questionário na base de dados de Apoio para Pesquisas Clínicas.
 
@@ -6,11 +6,25 @@ Renan Mendanha - 118055604
 Vínicius Flores -  115048056  
 Xiao Yong Kong - 114176987
 
+# Ferramentas Utilizadas
+-	Miro: Para criar o Site Map e elucidar as funções a serem implementadas;
+-	mySQL 5.7.22: implementação das consultas e queries, integração com interface
+-	Vue.js: como framewwork front-end;
+-	Nuxt: framework SSR (Server Side Rendering) utilizada junto com o Vue.js para facilitar a utilização de componentes de interface de forma que os dados ficassem dispostos de maneira mais organizada;
+-	Express: api para lidar com as requisições e conexão com o banco de dados;
+-	Telegram: comunicação rápida, código, e agendamento de reuniões;
+-	Github: compartilhamento de scripts e códigos remotamente;
+-	Discord: Ferramenta para conferências de áudio e vídeo que foi utilizada para os encontros do grupo.
+
 # Dependências e versões sendo utilizadas
 ### MySql
-O sistema da base de dados utiliza o MySql
+O sistema da base de dados utiliza o MySql 5.7.22
 ### Node.js e npm
-Será necessário instalar a última versão do Node.js e npm(6.14) que podem ser obtidos nesse [Link](https://nodejs.org/en/download/).
+Será necessário instalar a última versão do Node.js e npm(6.14) que podem ser obtidos [nesse Link](https://nodejs.org/en/download/) para executar os frameworks utilizados:
+-	Vue.js: como framewwork front-end;
+-	Nuxt: framework SSR (Server Side Rendering) utilizada junto com o Vue.js para facilitar a utilização de componentes de interface de forma que os dados ficassem dispostos de maneira mais organizada;
+-	Express: api para lidar com as requisições e conexão com o banco de dados;
+
 para instalar as dependencias no npm, devemos seguir os seguites procedimentos:
 
 ```shell-script
@@ -272,3 +286,13 @@ Essa mudança permite designar um id automáticamente aos novos grupos de quest�
 ALTER TABLE `tb_questiongroup`
   MODIFY `questionGroupID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 ```
+
+# Possíveis melhorias para o projeto
+## Criação de um banco de questões
+Atualmente, devido à estrutura do banco de dados, estamos limitados a um determinado número de questões em um form de um questionário, pois suas ordens necessitam de um formato de identificação específico para funcionar. Ao criar um banco de questões, será possível não só expandir as possibilidades em relação ao número de questões, mas também utilizar uma questão globalmente, de forma que todos os forms consigam referencia-la, evitando repetições de uma questão igual, porém em forms diferentes.
+## Funcionalidades adicionais
+Devido ao curto espaço de tempo para desenvolvimento do app focamos em funcionalidades básicas, porém, existem algumas funcionalidades adicionais que melhorariam a experiência que o usuário teria com o mesmo. Dentre elas, podemos citar:
+- Editar o cometário sobre o grupo de questões
+- Autenticação nas funcionalidades de remoção
+
+ `Rio de janeiro, 15 de Novembro de 2020, Universidade Federal do Rio de Janeiro`
