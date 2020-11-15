@@ -24,6 +24,27 @@ router.get('/groups', async function(req, res, next) {
   })
 })
 
+router.post('/groups', async function(req, res, next) {
+  sql.query('INSERT INTO `tb_questiongroup` (description) VALUES (?)', [req.body.description], (err, rows, fields) => {
+    if (err) throw err;
+    res.send(rows);
+  })
+})
+
+router.post('/groups/delete', async function(req, res, next) {
+  sql.query('DELETE FROM `tb_questiongroup` WHERE questionGroupID = ?', [req.body.id], (err, rows, fields) => {
+    if (err) throw err;
+    res.send(rows);
+  })
+})
+
+router.post('/groups/edit', async function(req, res, next) {
+  sql.query('UPDATE `tb_questiongroup` SET description = ? WHERE questionGroupID = ?', [req.body.description, req.body.id], (err, rows, fields) => {
+    if (err) throw err;
+    res.send(rows);
+  })
+})
+
 router.post('/edit/:id', async function(req, res, next) {
   if (req.body.questionTypeID == null) res.send('No question type defined')
   else {
@@ -142,7 +163,10 @@ router.post('/create', async function(req, res, next) {
               sql.rollback(() => {
                 throw err
               })
-            else sql.commit()
+            else {
+              sql.commit()
+              res.send('Success')
+            }
           })
         })
       })
@@ -168,7 +192,10 @@ router.post('/create', async function(req, res, next) {
                 sql.rollback(() => {
                   throw err
                 })
-              else sql.commit()
+              else {
+                sql.commit()
+                res.send('Success')
+              }
             })
           })
         })

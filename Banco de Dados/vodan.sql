@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2020 at 03:39 AM
+-- Generation Time: Nov 15, 2020 at 04:44 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -4118,6 +4118,12 @@ ALTER TABLE `tb_permission`
   ADD UNIQUE KEY `permissionID` (`permissionID`);
 
 --
+-- Indexes for table `tb_questiongroup`
+--
+ALTER TABLE `tb_questiongroup`
+  ADD PRIMARY KEY (`questionGroupID`);
+
+--
 -- Indexes for table `tb_questionnaire`
 --
 ALTER TABLE `tb_questionnaire`
@@ -4172,6 +4178,12 @@ ALTER TABLE `tb_language`
 --
 ALTER TABLE `tb_permission`
   MODIFY `permissionID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tb_questiongroup`
+--
+ALTER TABLE `tb_questiongroup`
+  MODIFY `questionGroupID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tb_questionnaire`

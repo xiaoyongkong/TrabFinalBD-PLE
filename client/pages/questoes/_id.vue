@@ -249,7 +249,7 @@ export default {
   methods: {
     fetchQuestions() {
       this.$axios.$get('/api/questions/' + this.$route.params.id + '?page=' + this.page).then(r => {
-        console.log(r)
+        console.log('Fetching questions...')
         this.questions = r.data
         this.questionnaire = r.questionnaire
         this.form = r.form
@@ -268,18 +268,18 @@ export default {
     updateQuestion(id) {
       this.$axios.$post('/api/questions/edit/' + this.editQuestionId, this.editQuestion).then(r => {
         console.log(r)
+        this.fetchQuestions()
       })
       this.cleanFields()
-      this.fetchQuestions()
       this.editDialog = false
     },
 
     createNewQuestion() {
       this.$axios.$post('/api/questions/create', {crfFormsID: this.$route.params.id, ...this.createQuestion}).then(r => {
         console.log(r)
+        this.fetchQuestions()
       })
       this.cleanFields()
-      this.fetchQuestions()
       this.dialog = false
     },
 
