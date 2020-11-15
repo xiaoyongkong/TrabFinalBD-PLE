@@ -180,7 +180,7 @@ Primeiramente, alteramos as informações da questão propriamente dita:
 ```SQL
 UPDATE `tb_questions` SET description=?, questionTypeID=?, questionGroupID=? where questionID=?
 ```
-Precisamos agora atualziar a ordem da questão no novo grupamento de questões:
+Precisamos agora atualizar a ordem da questão no novo grupamento de questões:
 ```SQL
 UPDATE `tb_questiongroupform` SET questionOrder=? where questionID=?
 ```
