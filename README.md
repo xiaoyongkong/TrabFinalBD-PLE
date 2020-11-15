@@ -161,7 +161,7 @@ UPDATE `tb_questions` SET description=?, questionTypeID=? where questionID=?
 ```
 
 ### Selecionar o valor da ordem da última questão de um grupamento em um form
-Se há mudança no grupamento da questão executaremos a querry que será apresentada a seguir para adicionar corretamente uma ordem à nova questão(a consulta pode não retornar resultados se não existir nenhuma questão em um determinado grupamento, caso isso aconteça, a ordem dentro do grupamento será 0, caso contrário, será o maior valor de ordem somando-se 1), mas antes, devemos verificar se estamos tratando de uma questão genérica, caso seja uma questão genérica não possuirá grupo e, por conseguência, terá o 'questionGroupID' nulo. Se tivermos uma verificação de nulo, devemos utilizar a declaração lógica 'is'ao invéz de '='. 
+Se há mudança no grupamento da questão, executaremos a querry que será apresentada a seguir para adicionar corretamente uma ordem à nova questão(a consulta pode não retornar resultados se não existir nenhuma questão em um determinado grupamento, caso isso aconteça, a ordem dentro do grupamento será 0, caso contrário, será o maior valor de ordem somando-se 1), mas antes, devemos verificar se estamos tratando de uma questão genérica, caso seja uma questão genérica não possuirá grupo e, por conseguência, terá o 'questionGroupID' nulo. Se tivermos uma verificação de nulo, devemos utilizar a declaração lógica 'is'ao invéz de '='. 
 ```JavaScript
 let dynamic_statement = '='
 if (req.body.questionGroupID == null)
@@ -180,18 +180,73 @@ Primeiramente, alteramos as informações da questão propriamente dita:
 ```SQL
 UPDATE `tb_questions` SET description=?, questionTypeID=?, questionGroupID=? where questionID=?
 ```
-Precisamos agora atualizar a ordem da questão no novo grupamento de questões:
+Precisamos agora atualizar a ordem da questão no novo grupamento de questões, levando em conta sua última ordem, assim como supracitado:
 ```SQL
 UPDATE `tb_questiongroupform` SET questionOrder=? where questionID=?
 ```
 
-## Adicionar uma questão
+## Adicionar uma nova questão
+### Selecionar o valor da ordem da última questão de um grupamento em um form
+Se há uma adição no grupamento da questão, executaremos a querry que será apresentada a seguir para adicionar corretamente uma ordem à nova questão(a consulta pode não retornar resultados se não existir nenhuma questão em um determinado grupamento, caso isso aconteça, a ordem dentro do grupamento será 0, caso contrário, será o maior valor de ordem somando-se 1), mas antes, devemos verificar se estamos tratando de uma questão genérica, caso seja uma questão genérica não possuirá grupo e, por conseguência, terá o 'questionGroupID' nulo. Se tivermos uma verificação de nulo, devemos utilizar a declaração lógica 'is'ao invéz de '='. 
+```JavaScript
+let dynamic_statement = '='
+if (!req.body.questionGroupID)
+  dynamic_statement = 'is'
+```
+Executamos a seguinte querry, inserindo a variável que define o tipo de comparação:
+```SQL
+'SELECT MAX(qgf.questionOrder) questionOrder 
+from `tb_questions` q 
+join `tb_questiongroupform` qgf on q.questionID=qgf.questionID 
+where qgf.crfFormsID=? 
+and q.questionGroupID ' + dynamic_statement + ' ?'
+```
+
+### Adicionar uma questão em um Form
+Primeiramente, inserimos as informações da questão propriamente dita:
+```SQL
+INSERT INTO `tb_questions` (description, questionTypeID, questionGroupID) values (?, ?, ?)
+```
+Precisamos agora inserir a ordem da questão e fazer a ligação com o seu form no novo grupamento de questões, levando em conta sua última ordem, assim como supracitado:
+```SQL
+INSERT INTO `tb_questiongroupform` (questionID, crfFormsID, questionOrder) values (?, ?, ?)
+```
+
+## Grupos de questões
+### Selecionar todos os grupamentos de questões
+```SQL
+SELECT * FROM `tb_questiongroup
+```
+
+### Inserir um grupamento
+```SQL
+INSERT INTO `tb_questiongroup` (description) VALUES (?)
+```
+
+### Remover um grupamento
+```SQL
+DELETE FROM `tb_questiongroup` WHERE questionGroupID = ?
+```
+### Editar um grupamento
+```SQL
+UPDATE `tb_questiongroup` SET description = ? WHERE questionGroupID = ?
+```
 
 ## Alterações realizadas no BD
 ### Adicionada a chave primária 'questionaireID' na relalção 'tb_questionaire'
 ```SQL
 ALTER TABLE `tb_questionnaire`
   ADD PRIMARY KEY (`questionnaireID`);
+```
+### Adicionada a chave primária 'questionID' na relalção 'tb_questions'
+```SQL
+ALTER TABLE `tb_questions`
+  ADD PRIMARY KEY (`questionID`);
+```
+### Adicionada a chave primária 'questionGroupID' na relalção 'tb_questiongroup'
+```SQL
+ALTER TABLE `tb_questiongroup`
+  ADD PRIMARY KEY (`questionGroupID`);
 ```
 ### Mudado o campo 'questionaireID' da tabela 'tb_questionaire' para Auto_Increment
 Essa mudança permite designar um id automáticamente aos novos questionários adicionados à relação.
@@ -204,4 +259,16 @@ Essa mudança permite designar um id automáticamente aos novos Formulários(mó
 ```SQL
 ALTER TABLE `tb_crfforms`
   MODIFY `crfFormsID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+```
+### Mudando o campo 'questionID' da tabela 'tb_questions' para Auto_Increment
+Essa mudança permite designar um id automáticamente às novas questões adicionadas na tabela.
+```SQL
+ALTER TABLE `tb_questions`
+  MODIFY `questionID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=256;
+```
+### Mudando o campo 'questionGroupID' da relação 'tb_questiongroup' para Auto_Increment
+Essa mudança permite designar um id automáticamente aos novos grupos de questões adicionados.
+```SQL
+ALTER TABLE `tb_questiongroup`
+  MODIFY `questionGroupID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 ```
