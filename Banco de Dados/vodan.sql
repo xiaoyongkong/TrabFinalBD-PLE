@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2020 at 04:44 AM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.4.7
+-- Tempo de geração: 16/11/2020 às 04:22
+-- Versão do servidor: 10.4.11-MariaDB
+-- Versão do PHP: 7.4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,12 +18,12 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `vodan`
+-- Banco de dados: `vodan`
 --
 
 DELIMITER $$
 --
--- Procedures
+-- Procedimentos
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getqst_rsp_modulo` (`p_crfformid` INTEGER)  BEGIN
  select crfformsid as modId, questionid as qstId,
@@ -59,7 +59,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `getqst_rsp_modulo` (`p_crfformid` I
 END$$
 
 --
--- Functions
+-- Funções
 --
 CREATE DEFINER=`root`@`localhost` FUNCTION `ontologyURI` (`ontologyacronym` VARCHAR(500), `tablename` VARCHAR(500), `identifier` INTEGER) RETURNS VARCHAR(500) CHARSET utf8mb4 BEGIN
 
@@ -134,7 +134,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_assessmentquestionnaire`
+-- Estrutura para tabela `tb_assessmentquestionnaire`
 --
 
 CREATE TABLE `tb_assessmentquestionnaire` (
@@ -146,7 +146,7 @@ CREATE TABLE `tb_assessmentquestionnaire` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_crfforms`
+-- Estrutura para tabela `tb_crfforms`
 --
 
 CREATE TABLE `tb_crfforms` (
@@ -156,18 +156,19 @@ CREATE TABLE `tb_crfforms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='(pt-br)\r\ntb_CRFForms identifica o tipo do formulario refere-se ao Questionnaire Subsection da Ontologia:\r\nAdmissão - Modulo 1\r\nAcompanhamento - Modulo 2\r\nDesfecho - Modulo 3\r\n(en)\r\ntb_CRFForms identifies the type of the form refers to the Questionnaire Subsection of Ontology: Admission - Module 1 Monitoring - Module 2 Outcome - Module 3';
 
 --
--- Dumping data for table `tb_crfforms`
+-- Despejando dados para a tabela `tb_crfforms`
 --
 
 INSERT INTO `tb_crfforms` (`crfFormsID`, `questionnaireID`, `description`) VALUES
 (1, 1, 'Admission form'),
 (2, 1, 'Follow-up'),
-(3, 1, 'Discharge/death form');
+(3, 1, 'Discharge/death form'),
+(4, 2, 'Definição de caso suspeito');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_formrecord`
+-- Estrutura para tabela `tb_formrecord`
 --
 
 CREATE TABLE `tb_formrecord` (
@@ -182,7 +183,7 @@ CREATE TABLE `tb_formrecord` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_grouprole`
+-- Estrutura para tabela `tb_grouprole`
 --
 
 CREATE TABLE `tb_grouprole` (
@@ -191,7 +192,7 @@ CREATE TABLE `tb_grouprole` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tb_grouprole`
+-- Despejando dados para a tabela `tb_grouprole`
 --
 
 INSERT INTO `tb_grouprole` (`groupRoleID`, `description`) VALUES
@@ -206,7 +207,7 @@ INSERT INTO `tb_grouprole` (`groupRoleID`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_grouprolepermission`
+-- Estrutura para tabela `tb_grouprolepermission`
 --
 
 CREATE TABLE `tb_grouprolepermission` (
@@ -215,7 +216,7 @@ CREATE TABLE `tb_grouprolepermission` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tb_grouprolepermission`
+-- Despejando dados para a tabela `tb_grouprolepermission`
 --
 
 INSERT INTO `tb_grouprolepermission` (`groupRoleID`, `permissionID`) VALUES
@@ -231,7 +232,7 @@ INSERT INTO `tb_grouprolepermission` (`groupRoleID`, `permissionID`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_hospitalunit`
+-- Estrutura para tabela `tb_hospitalunit`
 --
 
 CREATE TABLE `tb_hospitalunit` (
@@ -242,7 +243,7 @@ CREATE TABLE `tb_hospitalunit` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_language`
+-- Estrutura para tabela `tb_language`
 --
 
 CREATE TABLE `tb_language` (
@@ -251,7 +252,7 @@ CREATE TABLE `tb_language` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tb_language`
+-- Despejando dados para a tabela `tb_language`
 --
 
 INSERT INTO `tb_language` (`languageID`, `description`) VALUES
@@ -260,7 +261,7 @@ INSERT INTO `tb_language` (`languageID`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_listofvalues`
+-- Estrutura para tabela `tb_listofvalues`
 --
 
 CREATE TABLE `tb_listofvalues` (
@@ -270,7 +271,7 @@ CREATE TABLE `tb_listofvalues` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='(pt-br) Representa todos os valores padronizados do formulário.\r\n(en) Represents all standard values on the form.';
 
 --
--- Dumping data for table `tb_listofvalues`
+-- Despejando dados para a tabela `tb_listofvalues`
 --
 
 INSERT INTO `tb_listofvalues` (`listOfValuesID`, `listTypeID`, `description`) VALUES
@@ -585,7 +586,7 @@ INSERT INTO `tb_listofvalues` (`listOfValuesID`, `listTypeID`, `description`) VA
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_listtype`
+-- Estrutura para tabela `tb_listtype`
 --
 
 CREATE TABLE `tb_listtype` (
@@ -594,7 +595,7 @@ CREATE TABLE `tb_listtype` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_listtype`
+-- Despejando dados para a tabela `tb_listtype`
 --
 
 INSERT INTO `tb_listtype` (`listTypeID`, `description`) VALUES
@@ -618,7 +619,7 @@ INSERT INTO `tb_listtype` (`listTypeID`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_multilanguage`
+-- Estrutura para tabela `tb_multilanguage`
 --
 
 CREATE TABLE `tb_multilanguage` (
@@ -628,7 +629,7 @@ CREATE TABLE `tb_multilanguage` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tb_multilanguage`
+-- Despejando dados para a tabela `tb_multilanguage`
 --
 
 INSERT INTO `tb_multilanguage` (`languageID`, `description`, `descriptionLang`) VALUES
@@ -1194,7 +1195,7 @@ INSERT INTO `tb_multilanguage` (`languageID`, `description`, `descriptionLang`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_notificationrecord`
+-- Estrutura para tabela `tb_notificationrecord`
 --
 
 CREATE TABLE `tb_notificationrecord` (
@@ -1211,7 +1212,7 @@ CREATE TABLE `tb_notificationrecord` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_ontology`
+-- Estrutura para tabela `tb_ontology`
 --
 
 CREATE TABLE `tb_ontology` (
@@ -1224,7 +1225,7 @@ CREATE TABLE `tb_ontology` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_ontology`
+-- Despejando dados para a tabela `tb_ontology`
 --
 
 INSERT INTO `tb_ontology` (`ontologyID`, `description`, `version`, `dtRelease`, `license`, `acronym`) VALUES
@@ -1233,7 +1234,7 @@ INSERT INTO `tb_ontology` (`ontologyID`, `description`, `version`, `dtRelease`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_ontologyterms`
+-- Estrutura para tabela `tb_ontologyterms`
 --
 
 CREATE TABLE `tb_ontologyterms` (
@@ -1243,7 +1244,7 @@ CREATE TABLE `tb_ontologyterms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_ontologyterms`
+-- Despejando dados para a tabela `tb_ontologyterms`
 --
 
 INSERT INTO `tb_ontologyterms` (`ontologyID`, `ontologyURI`, `description`) VALUES
@@ -1830,7 +1831,7 @@ INSERT INTO `tb_ontologyterms` (`ontologyID`, `ontologyURI`, `description`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_participant`
+-- Estrutura para tabela `tb_participant`
 --
 
 CREATE TABLE `tb_participant` (
@@ -1841,7 +1842,7 @@ CREATE TABLE `tb_participant` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_permission`
+-- Estrutura para tabela `tb_permission`
 --
 
 CREATE TABLE `tb_permission` (
@@ -1850,7 +1851,7 @@ CREATE TABLE `tb_permission` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tb_permission`
+-- Despejando dados para a tabela `tb_permission`
 --
 
 INSERT INTO `tb_permission` (`permissionID`, `description`) VALUES
@@ -1862,7 +1863,7 @@ INSERT INTO `tb_permission` (`permissionID`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_questiongroup`
+-- Estrutura para tabela `tb_questiongroup`
 --
 
 CREATE TABLE `tb_questiongroup` (
@@ -1872,7 +1873,7 @@ CREATE TABLE `tb_questiongroup` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Relacionado ao Question Group da ontologia relaciona as diversas sessoes existentes nos formularios do CRF COVID-19';
 
 --
--- Dumping data for table `tb_questiongroup`
+-- Despejando dados para a tabela `tb_questiongroup`
 --
 
 INSERT INTO `tb_questiongroup` (`questionGroupID`, `description`, `comment`) VALUES
@@ -1889,12 +1890,20 @@ INSERT INTO `tb_questiongroup` (`questionGroupID`, `description`, `comment`) VAL
 (11, 'Pre-admission & chronic medication', 'Were any of the following taken within 14 days of admission?'),
 (12, 'Signs and symptoms on admission', ''),
 (13, 'Supportive care', 'Is the patient CURRENTLY receiving any of the following?'),
-(14, 'Vital signs', '');
+(14, 'Vital signs', ''),
+(15, 'Informações da Notificação', NULL),
+(16, 'Informações Pessoais', NULL),
+(17, 'Informações Clínicas', NULL),
+(18, 'Comorbidades', NULL),
+(19, 'Definição de Caso Suspeito', NULL),
+(20, 'Investigação Laboratorial', NULL),
+(21, 'Investigação de Contatos', NULL),
+(22, 'Fechamento', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_questiongroupform`
+-- Estrutura para tabela `tb_questiongroupform`
 --
 
 CREATE TABLE `tb_questiongroupform` (
@@ -1904,7 +1913,7 @@ CREATE TABLE `tb_questiongroupform` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_questiongroupform`
+-- Despejando dados para a tabela `tb_questiongroupform`
 --
 
 INSERT INTO `tb_questiongroupform` (`crfFormsID`, `questionID`, `questionOrder`) VALUES
@@ -2210,12 +2219,59 @@ INSERT INTO `tb_questiongroupform` (`crfFormsID`, `questionID`, `questionOrder`)
 (3, 236, 30412),
 (3, 237, 30414),
 (3, 238, 30416),
-(3, 240, 30419);
+(3, 240, 30419),
+(4, 256, 40000),
+(4, 257, 40001),
+(4, 258, 40002),
+(4, 259, 40003),
+(4, 260, 40004),
+(4, 261, 40005),
+(4, 262, 40006),
+(4, 263, 40100),
+(4, 264, 40101),
+(4, 265, 40102),
+(4, 266, 40103),
+(4, 267, 40104),
+(4, 268, 40105),
+(4, 269, 40106),
+(4, 270, 40107),
+(4, 271, 40108),
+(4, 272, 40109),
+(4, 273, 40110),
+(4, 274, 40111),
+(4, 275, 40200),
+(4, 276, 40201),
+(4, 277, 40202),
+(4, 278, 40203),
+(4, 279, 40204),
+(4, 280, 40205),
+(4, 281, 40206),
+(4, 282, 40207),
+(4, 283, 40208),
+(4, 284, 40209),
+(4, 285, 40210),
+(4, 286, 40300),
+(4, 287, 40400),
+(4, 288, 40401),
+(4, 289, 40402),
+(4, 290, 40403),
+(4, 291, 40404),
+(4, 292, 40405),
+(4, 293, 40500),
+(4, 294, 40501),
+(4, 295, 40502),
+(4, 296, 40503),
+(4, 297, 40504),
+(4, 298, 40600),
+(4, 299, 40601),
+(4, 300, 40700),
+(4, 301, 40701),
+(4, 302, 40702);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_questiongroupformrecord`
+-- Estrutura para tabela `tb_questiongroupformrecord`
 --
 
 CREATE TABLE `tb_questiongroupformrecord` (
@@ -2230,7 +2286,7 @@ CREATE TABLE `tb_questiongroupformrecord` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_questionnaire`
+-- Estrutura para tabela `tb_questionnaire`
 --
 
 CREATE TABLE `tb_questionnaire` (
@@ -2239,16 +2295,17 @@ CREATE TABLE `tb_questionnaire` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_questionnaire`
+-- Despejando dados para a tabela `tb_questionnaire`
 --
 
 INSERT INTO `tb_questionnaire` (`questionnaireID`, `description`) VALUES
-(1, 'WHO COVID-19 Rapid Version CRF');
+(1, 'WHO COVID-19 Rapid Version CRF'),
+(2, 'Ficha de Investigação de Caso  Suspeito de Novo Coronavírus');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_questionnaireparts`
+-- Estrutura para tabela `tb_questionnaireparts`
 --
 
 CREATE TABLE `tb_questionnaireparts` (
@@ -2257,7 +2314,7 @@ CREATE TABLE `tb_questionnaireparts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_questionnaireparts`
+-- Despejando dados para a tabela `tb_questionnaireparts`
 --
 
 INSERT INTO `tb_questionnaireparts` (`questionnairePartsID`, `questionnairePartsTableID`) VALUES
@@ -2869,7 +2926,7 @@ INSERT INTO `tb_questionnaireparts` (`questionnairePartsID`, `questionnaireParts
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_questionnairepartsontology`
+-- Estrutura para tabela `tb_questionnairepartsontology`
 --
 
 CREATE TABLE `tb_questionnairepartsontology` (
@@ -2880,7 +2937,7 @@ CREATE TABLE `tb_questionnairepartsontology` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_questionnairepartsontology`
+-- Despejando dados para a tabela `tb_questionnairepartsontology`
 --
 
 INSERT INTO `tb_questionnairepartsontology` (`ontologyID`, `ontologyURI`, `questionnairePartsID`, `questionnairePartsTableID`) VALUES
@@ -3492,7 +3549,7 @@ INSERT INTO `tb_questionnairepartsontology` (`ontologyID`, `ontologyURI`, `quest
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_questionnairepartstable`
+-- Estrutura para tabela `tb_questionnairepartstable`
 --
 
 CREATE TABLE `tb_questionnairepartstable` (
@@ -3501,7 +3558,7 @@ CREATE TABLE `tb_questionnairepartstable` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_questionnairepartstable`
+-- Despejando dados para a tabela `tb_questionnairepartstable`
 --
 
 INSERT INTO `tb_questionnairepartstable` (`questionnairePartsTableID`, `description`) VALUES
@@ -3516,7 +3573,7 @@ INSERT INTO `tb_questionnairepartstable` (`questionnairePartsTableID`, `descript
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_questions`
+-- Estrutura para tabela `tb_questions`
 --
 
 CREATE TABLE `tb_questions` (
@@ -3530,7 +3587,7 @@ CREATE TABLE `tb_questions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_questions`
+-- Despejando dados para a tabela `tb_questions`
 --
 
 INSERT INTO `tb_questions` (`questionID`, `description`, `questionTypeID`, `listTypeID`, `questionGroupID`, `subordinateTo`, `isAbout`) VALUES
@@ -3788,12 +3845,59 @@ INSERT INTO `tb_questions` (`questionID`, `description`, `questionTypeID`, `list
 (252, 'Loss of smell signs', 8, 15, 12, NULL, 243),
 (253, 'Loss of taste signs', 8, 15, 12, NULL, 244),
 (254, 'Which antiviral', 4, 1, 11, NULL, 101),
-(255, 'Which other antiviral', 7, NULL, 11, 254, 104);
+(255, 'Which other antiviral', 7, NULL, 11, 254, 104),
+(256, 'Protocolo do formulário', 7, NULL, 15, NULL, NULL),
+(257, 'Data de Notificação do Caso', 2, NULL, 15, NULL, NULL),
+(258, 'Unidade Notificante', 7, NULL, 15, NULL, NULL),
+(259, 'Profissional Responsável Pelo Preenchimento', 7, NULL, 15, NULL, NULL),
+(260, 'Cargo/Função', 7, NULL, 15, NULL, NULL),
+(261, 'Telefone de Contato', 7, NULL, 15, NULL, NULL),
+(262, 'Número da Notificação', 7, NULL, 15, NULL, NULL),
+(263, 'Nome', 7, NULL, 16, NULL, NULL),
+(264, 'Data de Nascimento', 2, NULL, 16, NULL, NULL),
+(265, 'Idade', 5, NULL, 16, NULL, NULL),
+(266, 'Sexo', 4, NULL, 16, NULL, NULL),
+(267, 'Endereço de residência', 7, NULL, 16, NULL, NULL),
+(268, 'País', 4, NULL, 16, NULL, NULL),
+(269, 'Estado', 4, NULL, 16, NULL, NULL),
+(270, 'Município de Residência', 7, NULL, 16, NULL, NULL),
+(271, 'UVIS de Residência', 4, NULL, 16, NULL, NULL),
+(272, 'Ocupação', 7, NULL, 16, NULL, NULL),
+(273, 'Local de trabalho/estudo', 7, NULL, 16, NULL, NULL),
+(274, 'Telefone de contato', 5, NULL, 16, NULL, NULL),
+(275, 'Data de Início dos Sintomas', 2, NULL, 17, NULL, NULL),
+(276, 'Data de Atendimento', 2, NULL, 17, NULL, NULL),
+(277, 'Local de Atendimento', 7, NULL, 17, NULL, NULL),
+(278, 'Município de Atendimento', 7, NULL, 17, NULL, NULL),
+(279, 'Hospitalização', 1, NULL, 17, NULL, NULL),
+(280, 'Máscara Cirúrgica foi/está sendo usada pelo paciente durante o seu transporte?', 4, NULL, 17, NULL, NULL),
+(281, 'Evolução', 4, NULL, 17, NULL, NULL),
+(282, 'Data da Evolução', 2, NULL, 17, NULL, NULL),
+(283, 'Sintomas', 3, NULL, 17, NULL, NULL),
+(284, 'Temperatura Aferida', 5, NULL, 17, NULL, NULL),
+(285, 'Exame Físico', 3, NULL, 17, NULL, NULL),
+(286, 'O caso possui comorbidades?', 3, NULL, 18, NULL, NULL),
+(287, 'O paciente viajou 14 dias antes do início dos sintomas?', 4, NULL, 19, NULL, NULL),
+(288, 'O paciente esteve em estabelecimentos de saúde nos 14 dias antes do inicio dos sintomas?', 4, NULL, 19, NULL, NULL),
+(289, 'O paciente teve contato com pessoa doente que viajou recentemente para a China ou países vizinhos?', 4, NULL, 19, NULL, NULL),
+(290, 'O paciente teve contato com caso confirmado ou suspeito de 2019 (n-Cov)?', 4, NULL, 19, NULL, NULL),
+(291, 'O paciente teve contato com mercado de animais vivo?', 4, NULL, 19, NULL, NULL),
+(292, 'Local da Exposição', 7, NULL, 19, NULL, NULL),
+(293, 'Realizado Coleta Laboratorial?', 3, NULL, 20, NULL, NULL),
+(294, 'Outros Exames Coletados', 7, NULL, 20, NULL, NULL),
+(295, 'GAL de Cadastro:', 7, NULL, 20, NULL, NULL),
+(296, 'Positivo para Influenza?', 1, NULL, 20, NULL, NULL),
+(297, 'Positivo para Outros vírus Respiratórios?', 1, NULL, 20, NULL, NULL),
+(298, 'Qual o número de contatos próximos?', 5, NULL, 21, NULL, NULL),
+(299, 'Quantos contatos foram orientados e estão sendo monitorados?', 5, NULL, 21, NULL, NULL),
+(300, 'Classificação Final', 4, NULL, 22, NULL, NULL),
+(301, 'Investigação dos contatos do caso confirmado', 1, NULL, 22, NULL, NULL),
+(302, 'Informações Complementares', 7, NULL, 22, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_questiontype`
+-- Estrutura para tabela `tb_questiontype`
 --
 
 CREATE TABLE `tb_questiontype` (
@@ -3802,7 +3906,7 @@ CREATE TABLE `tb_questiontype` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tb_questiontype`
+-- Despejando dados para a tabela `tb_questiontype`
 --
 
 INSERT INTO `tb_questiontype` (`questionTypeID`, `description`) VALUES
@@ -3820,7 +3924,7 @@ INSERT INTO `tb_questiontype` (`questionTypeID`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_user`
+-- Estrutura para tabela `tb_user`
 --
 
 CREATE TABLE `tb_user` (
@@ -3837,7 +3941,7 @@ CREATE TABLE `tb_user` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_userrole`
+-- Estrutura para tabela `tb_userrole`
 --
 
 CREATE TABLE `tb_userrole` (
@@ -3851,8 +3955,8 @@ CREATE TABLE `tb_userrole` (
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `vw_crfforms_covidcrfrapid`
--- (See below for the actual view)
+-- Estrutura stand-in para view `vw_crfforms_covidcrfrapid`
+-- (Veja abaixo para a visão atual)
 --
 CREATE TABLE `vw_crfforms_covidcrfrapid` (
 `crfFormsID` int(10)
@@ -3864,8 +3968,8 @@ CREATE TABLE `vw_crfforms_covidcrfrapid` (
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `vw_listofvalues_covidcrfrapid`
--- (See below for the actual view)
+-- Estrutura stand-in para view `vw_listofvalues_covidcrfrapid`
+-- (Veja abaixo para a visão atual)
 --
 CREATE TABLE `vw_listofvalues_covidcrfrapid` (
 `listOfValuesID` int(10)
@@ -3877,8 +3981,8 @@ CREATE TABLE `vw_listofvalues_covidcrfrapid` (
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `vw_listype_covidcrfrapid`
--- (See below for the actual view)
+-- Estrutura stand-in para view `vw_listype_covidcrfrapid`
+-- (Veja abaixo para a visão atual)
 --
 CREATE TABLE `vw_listype_covidcrfrapid` (
 `listTypeID` int(10)
@@ -3889,8 +3993,8 @@ CREATE TABLE `vw_listype_covidcrfrapid` (
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `vw_questiongroupform_covidcrfrapid`
--- (See below for the actual view)
+-- Estrutura stand-in para view `vw_questiongroupform_covidcrfrapid`
+-- (Veja abaixo para a visão atual)
 --
 CREATE TABLE `vw_questiongroupform_covidcrfrapid` (
 `crfFormsID` int(10)
@@ -3903,8 +4007,8 @@ CREATE TABLE `vw_questiongroupform_covidcrfrapid` (
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `vw_questiongroup_covidcrfrapid`
--- (See below for the actual view)
+-- Estrutura stand-in para view `vw_questiongroup_covidcrfrapid`
+-- (Veja abaixo para a visão atual)
 --
 CREATE TABLE `vw_questiongroup_covidcrfrapid` (
 `questionGroupID` int(10)
@@ -3916,8 +4020,8 @@ CREATE TABLE `vw_questiongroup_covidcrfrapid` (
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `vw_questionnaire_covidcrfrapid`
--- (See below for the actual view)
+-- Estrutura stand-in para view `vw_questionnaire_covidcrfrapid`
+-- (Veja abaixo para a visão atual)
 --
 CREATE TABLE `vw_questionnaire_covidcrfrapid` (
 `questionnaireID` int(10)
@@ -3928,8 +4032,8 @@ CREATE TABLE `vw_questionnaire_covidcrfrapid` (
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `vw_questions_covidcrfrapid`
--- (See below for the actual view)
+-- Estrutura stand-in para view `vw_questions_covidcrfrapid`
+-- (Veja abaixo para a visão atual)
 --
 CREATE TABLE `vw_questions_covidcrfrapid` (
 `questionID` int(10)
@@ -3945,8 +4049,8 @@ CREATE TABLE `vw_questions_covidcrfrapid` (
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `vw_questiontype_covidcrfrapid`
--- (See below for the actual view)
+-- Estrutura stand-in para view `vw_questiontype_covidcrfrapid`
+-- (Veja abaixo para a visão atual)
 --
 CREATE TABLE `vw_questiontype_covidcrfrapid` (
 `questionTypeID` int(10)
@@ -3957,7 +4061,7 @@ CREATE TABLE `vw_questiontype_covidcrfrapid` (
 -- --------------------------------------------------------
 
 --
--- Structure for view `vw_crfforms_covidcrfrapid`
+-- Estrutura para view `vw_crfforms_covidcrfrapid`
 --
 DROP TABLE IF EXISTS `vw_crfforms_covidcrfrapid`;
 
@@ -3966,7 +4070,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `vw_listofvalues_covidcrfrapid`
+-- Estrutura para view `vw_listofvalues_covidcrfrapid`
 --
 DROP TABLE IF EXISTS `vw_listofvalues_covidcrfrapid`;
 
@@ -3975,7 +4079,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `vw_listype_covidcrfrapid`
+-- Estrutura para view `vw_listype_covidcrfrapid`
 --
 DROP TABLE IF EXISTS `vw_listype_covidcrfrapid`;
 
@@ -3984,7 +4088,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `vw_questiongroupform_covidcrfrapid`
+-- Estrutura para view `vw_questiongroupform_covidcrfrapid`
 --
 DROP TABLE IF EXISTS `vw_questiongroupform_covidcrfrapid`;
 
@@ -3993,7 +4097,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `vw_questiongroup_covidcrfrapid`
+-- Estrutura para view `vw_questiongroup_covidcrfrapid`
 --
 DROP TABLE IF EXISTS `vw_questiongroup_covidcrfrapid`;
 
@@ -4002,7 +4106,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `vw_questionnaire_covidcrfrapid`
+-- Estrutura para view `vw_questionnaire_covidcrfrapid`
 --
 DROP TABLE IF EXISTS `vw_questionnaire_covidcrfrapid`;
 
@@ -4011,7 +4115,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `vw_questions_covidcrfrapid`
+-- Estrutura para view `vw_questions_covidcrfrapid`
 --
 DROP TABLE IF EXISTS `vw_questions_covidcrfrapid`;
 
@@ -4020,18 +4124,18 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Structure for view `vw_questiontype_covidcrfrapid`
+-- Estrutura para view `vw_questiontype_covidcrfrapid`
 --
 DROP TABLE IF EXISTS `vw_questiontype_covidcrfrapid`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_questiontype_covidcrfrapid`  AS  select `t1`.`questionTypeID` AS `questionTypeID`,`t1`.`description` AS `description`,`ontologyURI`('COVIDCRFRAPID','tb_questiontype',`t1`.`questionTypeID`) AS `ontologyURI` from `tb_questiontype` `t1` ;
 
 --
--- Indexes for dumped tables
+-- Índices de tabelas apagadas
 --
 
 --
--- Indexes for table `tb_assessmentquestionnaire`
+-- Índices de tabela `tb_assessmentquestionnaire`
 --
 ALTER TABLE `tb_assessmentquestionnaire`
   ADD PRIMARY KEY (`participantID`,`hospitalUnitID`,`questionnaireID`),
@@ -4039,14 +4143,14 @@ ALTER TABLE `tb_assessmentquestionnaire`
   ADD KEY `FKtb_Assessm419169` (`questionnaireID`);
 
 --
--- Indexes for table `tb_crfforms`
+-- Índices de tabela `tb_crfforms`
 --
 ALTER TABLE `tb_crfforms`
   ADD PRIMARY KEY (`crfFormsID`),
   ADD KEY `FKtb_CRFForm860269` (`questionnaireID`);
 
 --
--- Indexes for table `tb_formrecord`
+-- Índices de tabela `tb_formrecord`
 --
 ALTER TABLE `tb_formrecord`
   ADD PRIMARY KEY (`formRecordID`),
@@ -4054,89 +4158,89 @@ ALTER TABLE `tb_formrecord`
   ADD KEY `FKtb_FormRec984256` (`participantID`,`hospitalUnitID`,`questionnaireID`);
 
 --
--- Indexes for table `tb_grouprole`
+-- Índices de tabela `tb_grouprole`
 --
 ALTER TABLE `tb_grouprole`
   ADD PRIMARY KEY (`groupRoleID`),
   ADD UNIQUE KEY `groupRoleID` (`groupRoleID`);
 
 --
--- Indexes for table `tb_grouprolepermission`
+-- Índices de tabela `tb_grouprolepermission`
 --
 ALTER TABLE `tb_grouprolepermission`
   ADD PRIMARY KEY (`groupRoleID`,`permissionID`),
   ADD KEY `FKtb_GroupRo893005` (`permissionID`);
 
 --
--- Indexes for table `tb_hospitalunit`
+-- Índices de tabela `tb_hospitalunit`
 --
 ALTER TABLE `tb_hospitalunit`
   ADD PRIMARY KEY (`hospitalUnitID`);
 
 --
--- Indexes for table `tb_language`
+-- Índices de tabela `tb_language`
 --
 ALTER TABLE `tb_language`
   ADD PRIMARY KEY (`languageID`);
 
 --
--- Indexes for table `tb_listofvalues`
+-- Índices de tabela `tb_listofvalues`
 --
 ALTER TABLE `tb_listofvalues`
   ADD PRIMARY KEY (`listOfValuesID`),
   ADD KEY `FKtb_ListOfV184108` (`listTypeID`);
 
 --
--- Indexes for table `tb_listtype`
+-- Índices de tabela `tb_listtype`
 --
 ALTER TABLE `tb_listtype`
   ADD PRIMARY KEY (`listTypeID`);
 
 --
--- Indexes for table `tb_multilanguage`
+-- Índices de tabela `tb_multilanguage`
 --
 ALTER TABLE `tb_multilanguage`
   ADD PRIMARY KEY (`languageID`,`description`);
 
 --
--- Indexes for table `tb_notificationrecord`
+-- Índices de tabela `tb_notificationrecord`
 --
 ALTER TABLE `tb_notificationrecord`
   ADD PRIMARY KEY (`userID`,`profileID`,`hospitalUnitID`,`tableName`,`rowdID`,`changedOn`,`operation`);
 
 --
--- Indexes for table `tb_ontology`
+-- Índices de tabela `tb_ontology`
 --
 ALTER TABLE `tb_ontology`
   ADD PRIMARY KEY (`ontologyID`);
 
 --
--- Indexes for table `tb_permission`
+-- Índices de tabela `tb_permission`
 --
 ALTER TABLE `tb_permission`
   ADD PRIMARY KEY (`permissionID`),
   ADD UNIQUE KEY `permissionID` (`permissionID`);
 
 --
--- Indexes for table `tb_questiongroup`
+-- Índices de tabela `tb_questiongroup`
 --
 ALTER TABLE `tb_questiongroup`
   ADD PRIMARY KEY (`questionGroupID`);
 
 --
--- Indexes for table `tb_questionnaire`
+-- Índices de tabela `tb_questionnaire`
 --
 ALTER TABLE `tb_questionnaire`
   ADD PRIMARY KEY (`questionnaireID`);
 
 --
--- Indexes for table `tb_questions`
+-- Índices de tabela `tb_questions`
 --
 ALTER TABLE `tb_questions`
   ADD PRIMARY KEY (`questionID`);
 
 --
--- Indexes for table `tb_user`
+-- Índices de tabela `tb_user`
 --
 ALTER TABLE `tb_user`
   ADD PRIMARY KEY (`userID`),
@@ -4144,7 +4248,7 @@ ALTER TABLE `tb_user`
   ADD UNIQUE KEY `login` (`login`);
 
 --
--- Indexes for table `tb_userrole`
+-- Índices de tabela `tb_userrole`
 --
 ALTER TABLE `tb_userrole`
   ADD PRIMARY KEY (`userID`,`groupRoleID`,`hospitalUnitID`),
@@ -4152,53 +4256,53 @@ ALTER TABLE `tb_userrole`
   ADD KEY `FKtb_UserRol324331` (`hospitalUnitID`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de tabelas apagadas
 --
 
 --
--- AUTO_INCREMENT for table `tb_crfforms`
+-- AUTO_INCREMENT de tabela `tb_crfforms`
 --
 ALTER TABLE `tb_crfforms`
-  MODIFY `crfFormsID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `crfFormsID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `tb_grouprole`
+-- AUTO_INCREMENT de tabela `tb_grouprole`
 --
 ALTER TABLE `tb_grouprole`
   MODIFY `groupRoleID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `tb_language`
+-- AUTO_INCREMENT de tabela `tb_language`
 --
 ALTER TABLE `tb_language`
   MODIFY `languageID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `tb_permission`
+-- AUTO_INCREMENT de tabela `tb_permission`
 --
 ALTER TABLE `tb_permission`
   MODIFY `permissionID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `tb_questiongroup`
+-- AUTO_INCREMENT de tabela `tb_questiongroup`
 --
 ALTER TABLE `tb_questiongroup`
-  MODIFY `questionGroupID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `questionGroupID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT for table `tb_questionnaire`
+-- AUTO_INCREMENT de tabela `tb_questionnaire`
 --
 ALTER TABLE `tb_questionnaire`
-  MODIFY `questionnaireID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `questionnaireID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `tb_questions`
+-- AUTO_INCREMENT de tabela `tb_questions`
 --
 ALTER TABLE `tb_questions`
-  MODIFY `questionID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=256;
+  MODIFY `questionID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=303;
 
 --
--- AUTO_INCREMENT for table `tb_user`
+-- AUTO_INCREMENT de tabela `tb_user`
 --
 ALTER TABLE `tb_user`
   MODIFY `userID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
