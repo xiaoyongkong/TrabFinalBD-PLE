@@ -163,6 +163,12 @@ where q.questionGroupID=?
 and qgf.crfFormsID=? 
 LIMIT 1
 ```
+
+### Remoção de uma questão
+```SQL
+DELETE FROM `tb_questions` where questionID = ?
+```
+
 ## Editar uma questão
 ### Atualizar a descrição de uma questão em um form
 Para verificar se a ação está somente mudando a descrição de uma questão, o grupo da questão e o ID não deve ser alterado, por isso há a verificação do novo grupo da questão, se ele for igual, a querry muda somente a descrição. 
