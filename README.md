@@ -163,6 +163,12 @@ where q.questionGroupID=?
 and qgf.crfFormsID=? 
 LIMIT 1
 ```
+
+### Remoção de uma questão
+```SQL
+DELETE FROM `tb_questions` where questionID = ?
+```
+
 ## Editar uma questão
 ### Atualizar a descrição de uma questão em um form
 Para verificar se a ação está somente mudando a descrição de uma questão, o grupo da questão e o ID não deve ser alterado, por isso há a verificação do novo grupo da questão, se ele for igual, a querry muda somente a descrição. 
@@ -294,5 +300,6 @@ Atualmente, devido à estrutura do banco de dados, estamos limitados a um determ
 Devido ao curto espaço de tempo para desenvolvimento do app focamos em funcionalidades básicas, porém, existem algumas funcionalidades adicionais que melhorariam a experiência que o usuário teria com o mesmo. Dentre elas, podemos citar:
 - Editar o cometário sobre o grupo de questões
 - Autenticação nas funcionalidades de remoção
+- Exibição das questões aninhadas a uma questão pai
 
  `Rio de janeiro, 15 de Novembro de 2020, Universidade Federal do Rio de Janeiro`
