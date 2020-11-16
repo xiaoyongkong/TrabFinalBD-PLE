@@ -300,5 +300,6 @@ Atualmente, devido à estrutura do banco de dados, estamos limitados a um determ
 Devido ao curto espaço de tempo para desenvolvimento do app focamos em funcionalidades básicas, porém, existem algumas funcionalidades adicionais que melhorariam a experiência que o usuário teria com o mesmo. Dentre elas, podemos citar:
 - Editar o cometário sobre o grupo de questões
 - Autenticação nas funcionalidades de remoção
+- Exibição das questões aninhadas a uma questão pai
 
  `Rio de janeiro, 15 de Novembro de 2020, Universidade Federal do Rio de Janeiro`
