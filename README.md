@@ -253,17 +253,17 @@ UPDATE `tb_questiongroup` SET description = ? WHERE questionGroupID = ?
 ```
 
 ## Alterações realizadas no BD
-### Adicionada a chave primária 'questionaireID' na relalção 'tb_questionaire'
+### Adicionada a chave primária 'questionaireID' na relação 'tb_questionaire'
 ```SQL
 ALTER TABLE `tb_questionnaire`
   ADD PRIMARY KEY (`questionnaireID`);
 ```
-### Adicionada a chave primária 'questionID' na relalção 'tb_questions'
+### Adicionada a chave primária 'questionID' na relação 'tb_questions'
 ```SQL
 ALTER TABLE `tb_questions`
   ADD PRIMARY KEY (`questionID`);
 ```
-### Adicionada a chave primária 'questionGroupID' na relalção 'tb_questiongroup'
+### Adicionada a chave primária 'questionGroupID' na relação 'tb_questiongroup'
 ```SQL
 ALTER TABLE `tb_questiongroup`
   ADD PRIMARY KEY (`questionGroupID`);
